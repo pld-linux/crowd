@@ -8,12 +8,16 @@
 #     installation each user has to download Crowd from atlassian web page.
 #
 # See Atlassian_EULA_3.0.pdf for more details.
+#
+# Don't install it on same tomcat with confluence. It will break confluence.
+# See http://confluence.atlassian.com/pages/viewpage.action?pageId=208962752
+# for details. This workaround wn't work, because feilx' version required by
+# confluence is to recent for crowd.
 
 %if 0
 # Download sources manually:
 wget -c http://downloads.atlassian.com/software/crowd/downloads/atlassian-crowd-2.0.4-war.zip
 wget -c http://www.atlassian.com/about/licensing/Atlassian_EULA_3.0.pdf
-wget -c http://repository.atlassian.com/org.apache.felix/jars/org.apache.felix.main-2.0.5.jar
 %endif
 
 %include	/usr/lib/rpm/macros.java
@@ -21,7 +25,7 @@ wget -c http://repository.atlassian.com/org.apache.felix/jars/org.apache.felix.m
 Summary:	SSO server
 Name:		crowd
 Version:	2.0.4
-Release:	0.1
+Release:	1
 License:	Proprietary, not distributable
 Group:		Networking/Daemons/Java/Servlets
 Source0:	atlassian-%{name}-%{version}-war.zip
@@ -32,9 +36,6 @@ Source1:	Atlassian_EULA_3.0.pdf
 NoSource:	1
 Source2:	tomcat-context.xml
 Source3:	%{name}-init.properties
-Source4:	org.apache.felix.main-2.0.5.jar
-# NoSource4-md5:	edfbdb9fd59aeb21022391e2934f75c0
-NoSource:	4
 URL:		http://www.atlassian.com/software/crowd/default.jsp
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
@@ -57,10 +58,6 @@ interface.
 %setup -q -c
 
 cp %{SOURCE1} .
-
-# http://confluence.atlassian.com/pages/viewpage.action?pageId=208962752
-find -name 'org.apache.felix.main*.jar' | xargs rm
-cp %{SOURCE4} WEB-INF/lib
 
 # TODO set paths for logs
 # sed -i 's,^\(log4j\.appender\.[a-z]*\.File\)=\(.*\)$,\1=/var/log/crowd/\2,' webapp/WEB-INF/classes/log4j.properties
