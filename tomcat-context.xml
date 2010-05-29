@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<Context path="/crowd" docBase="/usr/share/crowd"
+        privileged="false" allowLinking="true">
+
+  <!-- WARNING: It is highly remomended to use real database instead of
+       internal hsqldb. See example config for mysql below -->
+
+  <Resource name="jdbc/CrowdDS" auth="Container" type="javax.sql.DataSource"
+    username="sa"
+    password=""
+    driverClassName="org.hsqldb.jdbcDriver"
+    url="jdbc:hsqldb:/var/lib/crowd/crowdb/"
+    minEvictableIdleTimeMillis="4000"
+    timeBetweenEvictionRunsMillis="5000"/>
+  
+  <!-- If you want to use mysql database, comment out previous jdbc resource,
+       and uncomment this one. You will also have to customize your
+       entityengine.xml.
+
+       Make sure that mysql listens on TCP socket, because java do not know
+       how to use UNIX sockets. If you are not sure if mysql is configured
+       correctly, try to connect to it with the following command:
+       $ mysq -h127.0.0.1 -ucrowd -pcrowd crowd
+       Note 127.0.0.1, not localhost, which is resolved to UNIX socke path by
+       mysql client.
+    -->
+
+  <!--
+
+  <Resource name="jdbc/CrowdDS" auth="Container" type="javax.sql.DataSource"
+    username="crowd"
+    password="crowd"
+    driverClassName="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://localhost/crowd?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF8"
+    maxActive="20"
+    validationQuery="select 1" />
+
+    -->
+
+</Context>
