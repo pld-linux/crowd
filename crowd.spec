@@ -79,7 +79,7 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/crowd-init.properties
 ln -s %{_sysconfdir}/%{name}/tomcat-context.xml $RPM_BUILD_ROOT%{_sharedstatedir}/tomcat/conf/Catalina/localhost/%{name}.xml
 mv $RPM_BUILD_ROOT%{_datadir}/crowd/WEB-INF/classes/log4j.properties $RPM_BUILD_ROOT%{_sysconfdir}/crowd/log4j.properties
 ln -sf %{_sysconfdir}/crowd/log4j.properties $RPM_BUILD_ROOT%{_datadir}/crowd/WEB-INF/classes/log4j.properties
-ln -sf %{_sysconfdir}/crowd/crowd-init.properties $RPM_BUILD_ROOT%{_datadir}/crowd/WEB-INF/classes/crowd-initlog4j.properties
+ln -sf %{_sysconfdir}/crowd/crowd-init.properties $RPM_BUILD_ROOT%{_datadir}/crowd/WEB-INF/classes/crowd-init.properties
 
 # additional libs
 ln -s %{_datadir}/java/jta.jar $RPM_BUILD_ROOT%{_datadir}/crowd/WEB-INF/lib/jta.jar
