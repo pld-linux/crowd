@@ -20,7 +20,6 @@ wget -c http://downloads.atlassian.com/software/crowd/downloads/atlassian-crowd-
 wget -c http://www.atlassian.com/about/licensing/Atlassian_EULA_3.0.pdf
 %endif
 
-%include	/usr/lib/rpm/macros.java
 
 Summary:	SSO server
 Name:		crowd
